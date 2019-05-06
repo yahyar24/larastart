@@ -83,7 +83,7 @@ to get the desired effect
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview">
-            <router-link to="/dashboard" class="nav-link">
+            <router-link to="/Dashboard" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt blue"></i>
               <p>
                 Dashboard
@@ -94,7 +94,7 @@ to get the desired effect
           </li>
           @can('isAdmin')
           <li class="nav-item">
-            <router-link to="/developer" class="nav-link">
+            <router-link to="/Developer" class="nav-link">
               <i class="nav-icon fa fa-cogs"></i>
               <p>
                 Developer
@@ -123,7 +123,7 @@ to get the desired effect
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <router-link to="/users" class="nav-link">
+                <router-link to="/Uesrs" class="nav-link">
                   <i class="fa fa-users nave-icon"></i>
                   <p>Users</p>
                 </router-link>
@@ -163,18 +163,22 @@ to get the desired effect
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/UI/general.html" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Post</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/UI/icons.html" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>category</p>
-                </a>
-              </li>
+            <li >
+                        <router-link to="/post-list"  class="nav-link">
+                            <p>
+                                Post
+                                <span class="right badge badge-danger">New</span>
+                            </p>
+                        </router-link>
+                    </li>
+              <li >
+                        <router-link to="/category-list" class="nav-link">
+                            <p>
+                                Category
+
+                            </p>
+                        </router-link>
+                    </li>
             
             </ul>
           </li>

@@ -8,6 +8,17 @@
 
 require('./bootstrap');
 
+import Vuex from 'vuex'
+Vue.use(Vuex)
+import storeData from "./store/index"
+const store = new Vuex.Store(
+    storeData
+)
+//support moment js
+
+import {routes} from './routes';
+
+
 window.Vue = require('vue');
 import swal from 'sweetalert';
 
@@ -46,20 +57,10 @@ Vue.component(AlertError.name, AlertError)
 
 Vue.component('pagination', require('laravel-vue-pagination'));
 
-
-
 window.Form = Form;
 
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
-const routes = [
-    { path: '/dashboard', component: require('./components/Dashboard.vue').default },
-    { path: '/developer', component: require('./components/Developer.vue').default },
-    { path: '/profile', component: require('./components/profile.vue').default },
-    { path: '/users', component: require('./components/Users.vue').default }
-
-  ]
-
   const router = new VueRouter({
     mode: 'history',
     routes // short for `routes: routes`
