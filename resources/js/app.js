@@ -5,9 +5,102 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+
 require('./bootstrap');
 
 window.Vue = require('vue');
+import swal from 'sweetalert';
+
+window.swal = swal;
+swal({
+  title: "Good job!",
+  text: "You clicked the button!",
+  icon: "success",
+  button: "Aww yiss!",
+});
+
+import Gate from "./Gate";
+Vue.prototype.$gate = new Gate(window.user);
+
+
+import moment from 'moment';
+
+import VueProgressBar from 'vue-progressbar'
+Vue.use(VueProgressBar ,{
+  color:'rgb(143, 255 , 199)',
+  failedColor: 'red' ,
+  height : '3px'
+
+
+})
+
+import { Form, HasError, AlertError } from 'vform';
+
+
+
+
+
+
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
+
+Vue.component('pagination', require('laravel-vue-pagination'));
+
+
+
+window.Form = Form;
+
+import VueRouter from 'vue-router'
+Vue.use(VueRouter)
+const routes = [
+    { path: '/dashboard', component: require('./components/Dashboard.vue').default },
+    { path: '/developer', component: require('./components/Developer.vue').default },
+    { path: '/profile', component: require('./components/profile.vue').default },
+    { path: '/users', component: require('./components/Users.vue').default }
+
+  ]
+
+  const router = new VueRouter({
+    mode: 'history',
+    routes // short for `routes: routes`
+  })
+
+  Vue.filter('upText' , function(text){
+    return text.charAt(0).toUpperCase() + text.slice(1)
+
+  });
+
+  Vue.filter('myDate',function(created){
+    return moment(created).format('MMMM Do YYYY');
+
+  });
+
+   
+  
+  window.Fire = new Vue();
+
+  //passport start
+  Vue.component(
+    'passport-clients',
+    require('./components/passport/Clients.vue').default
+);
+
+Vue.component(
+    'passport-authorized-clients',
+    require('./components/passport/AuthorizedClients.vue').default
+);
+
+Vue.component(
+    'passport-personal-access-tokens',
+    require('./components/passport/PersonalAccessTokens.vue').default
+);
+
+
+Vue.component(
+    'not-found',
+    require('./components/notFound.vue').default
+);
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -29,5 +122,18 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  */
 
 const app = new Vue({
-    el: '#app'
+  el: '#app',
+  router,
+  data:{
+      search: ''
+  },
+  methods:{
+      searchit: _.debounce(() => {
+          Fire.$emit('searching');
+      },1000),
+
+      printme() {
+          window.print();
+      }
+  }
 });
